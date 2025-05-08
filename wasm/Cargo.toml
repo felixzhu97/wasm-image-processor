@@ -1,0 +1,12 @@
+[package]
+name = "image-processor"
+version = "0.1.0"
+edition = "2021"
+description = "WebAssembly image processing library"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
