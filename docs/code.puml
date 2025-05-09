@@ -1,0 +1,30 @@
+@startuml WASM Image Processor - Code
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title 代码图 - WASM图像处理器
+
+Container_Boundary(wasm_module, "WASM模块") {
+    Component(filter_processor, "滤镜处理器", "Rust", "实现各种图像滤镜")
+    Component(compression, "压缩算法", "Rust", "图像压缩处理")
+    Component(color_adjust, "色彩调整", "Rust", "亮度/对比度调整")
+    
+    Rel(filter_processor, compression, "调用", "Rust FFI")
+    Rel(filter_processor, color_adjust, "调用", "Rust FFI")
+}
+
+Container_Boundary(web_app, "Web应用") {
+    Component(upload_component, "上传组件", "React", "文件上传界面")
+    Component(filter_selector, "滤镜选择器", "React", "滤镜参数控制")
+    Component(preview_component, "预览组件", "React", "实时效果预览")
+    
+    Rel(upload_component, filter_selector, "传递图像数据", "React Context")
+    Rel(filter_selector, preview_component, "更新参数", "React Props")
+}
+
+legend right
+<b>关键代码模块</b>
+1. 滤镜处理器: 实现各种图像滤镜算法
+2. 上传组件: 处理用户文件上传
+3. 预览组件: 实时显示处理效果
+endlegend
+@enduml

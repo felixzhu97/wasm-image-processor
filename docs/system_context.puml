@@ -1,0 +1,22 @@
+@startuml WASM Image Processor - System Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title 系统上下文图 - WASM图像处理器
+
+Person(user, "用户", "需要进行图像处理的终端用户")
+System(image_processor, "WASM图像处理器", "提供图像上传、处理和下载功能")
+
+System_Ext(browser, "浏览器", "Chrome/Firefox/Safari等")
+System_Ext(mobile, "移动设备", "手机/平板等")
+
+Rel(user, browser, "使用", "HTTP/HTTPS")
+Rel(user, mobile, "使用", "HTTP/HTTPS")
+Rel(browser, image_processor, "调用API", "REST")
+Rel(mobile, image_processor, "调用API", "REST")
+
+legend right
+<b>关键交互说明</b>
+1. 用户通过浏览器或移动设备访问系统
+2. 系统提供图像处理服务
+endlegend
+@enduml

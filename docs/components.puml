@@ -1,0 +1,32 @@
+@startuml WASM Image Processor - Components
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title 组件图 - WASM图像处理器
+
+Container_Boundary(web_app, "Web应用") {
+    Component(ui_components, "UI组件", "React", "用户界面展示")
+    Component(auth_service, "认证服务", "NextAuth.js", "处理用户认证")
+    Component(image_api, "图像API", "Next.js API Routes", "处理图像上传下载")
+    Component(wasm_bridge, "WASM桥接", "JavaScript", "与WASM模块交互")
+    
+    Rel(ui_components, auth_service, "调用", "JWT")
+    Rel(ui_components, image_api, "上传/下载", "REST")
+    Rel(ui_components, wasm_bridge, "调用", "JavaScript")
+}
+
+Container_Boundary(wasm_module, "WASM模块") {
+    Component(image_processor, "图像处理器", "Rust", "核心图像处理逻辑")
+    Component(utils, "工具函数", "Rust", "辅助函数")
+    
+    Rel(image_processor, utils, "调用", "Rust FFI")
+}
+
+Rel(wasm_bridge, image_processor, "通信", "WebAssembly")
+
+legend right
+<b>关键组件说明</b>
+1. UI组件: 基于React的界面组件
+2. 图像API: 处理文件上传下载
+3. WASM桥接: JavaScript与Rust的交互层
+endlegend
+@enduml

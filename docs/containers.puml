@@ -1,0 +1,24 @@
+@startuml WASM Image Processor - Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title 容器图 - WASM图像处理器
+
+Person(user, "用户", "终端用户")
+
+System_Boundary(system, "WASM图像处理系统") {
+    Container(web_app, "Web应用", "Next.js", "提供用户界面和API")
+    Container(wasm_module, "WASM模块", "Rust", "执行核心图像处理算法")
+    ContainerDb(browser_storage, "浏览器存储", "LocalStorage/IndexedDB", "存储用户偏好和临时数据")
+    
+    Rel(user, web_app, "交互", "HTTP/HTTPS")
+    Rel(web_app, wasm_module, "调用", "WebAssembly")
+    Rel(web_app, browser_storage, "读写", "Web Storage API")
+}
+
+legend right
+<b>关键容器说明</b>
+1. Web应用: 基于Next.js的前端应用
+2. WASM模块: Rust实现的图像处理核心
+3. 浏览器存储: 客户端数据持久化
+endlegend
+@enduml
