@@ -1,0 +1,17 @@
+{
+  "name": "image-processor",
+  "type": "module",
+  "description": "WebAssembly image processing library",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "image_processor_bg.wasm",
+    "image_processor.js",
+    "image_processor.d.ts"
+  ],
+  "main": "image_processor.js",
+  "types": "image_processor.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

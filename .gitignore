@@ -30,5 +30,4 @@ next-env.d.ts
 .idea/
 
 # wasm
-wasm/pkg/
 wasm/target/
